@@ -19,7 +19,6 @@ https://github.com/USERNAME/SK-DRP
 - `CWQ/`: scripts for CWQ data loading, training, and evaluation.
 - `WebQSP_half/`: additional WebQSP variant scripts.
 - `utils/`: shared GRU, scheduler, metric, and optimizer utilities.
-- `pics/`: framework illustrations.
 - `requirements.txt`: Python package requirements.
 - `GITHUB_UPLOAD_GUIDE.md`: step-by-step upload guide.
 
