@@ -6,7 +6,7 @@
 [![License](https://img.shields.io/badge/License-See%20LICENSE.txt-lightgrey)]()
 [![Status](https://img.shields.io/badge/Status-Research%20Release-yellow)]()
 
-**SK-DRP** is an open-source research codebase for **Syntax-Knowledge enhanced Dynamic Reasoning with Prompt learning for interpretable knowledge graph question answering**.
+**SK-DRP** is an open-source research codebase for **Syntax-Knowledge enhanced Dynamic Reasoning with Prompt learning** for interpretable knowledge graph question answering.
 
 This repository contains the cleaned implementation scripts for the manuscript:
 
