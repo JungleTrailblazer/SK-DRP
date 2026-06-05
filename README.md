@@ -121,6 +121,8 @@ Install the dependencies with:
 pip install -r requirements.txt
 ```
 
+Some optional preprocessing or debugging scripts may require additional packages such as `nltk` or `ipython`, depending on which script is executed.
+
 A virtual environment is recommended:
 
 ```bash
@@ -160,9 +162,9 @@ The exact commands depend on dataset preparation and local path configuration.
 Typical training entry points include:
 
 ```bash
-python WebQSP/train_hop_final.py --input_dir data/WebQSP
-python CWQ/train_final.py --input_dir data/CWQ
-python MetaQA/train_final.py --input_dir data/MetaQA
+python WebQSP/train_hop_final.py --input_dir data/WebQSP --save_dir checkpoints/WebQSP
+python CWQ/train_final.py --input_dir data/CWQ --save_dir checkpoints/CWQ
+python MetaQA/train_final.py --input_dir data/MetaQA --save_dir checkpoints/MetaQA --glove_pt data/glove/glove.840B.300d.pickle
 ```
 
 For prediction or demonstration, please inspect the corresponding `demo_*.py`, `predict*.py`, and evaluation scripts in each dataset folder.
