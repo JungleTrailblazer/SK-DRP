@@ -4,15 +4,17 @@
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.x-red)]()
 [![CUDA](https://img.shields.io/badge/CUDA-12.1-green)]()
 [![License](https://img.shields.io/badge/License-See%20LICENSE.txt-lightgrey)]()
-[![Status](https://img.shields.io/badge/Status-Research%20Release-yellow)]()
+[![Status](https://img.shields.io/badge/Status-Research%20Code%20Release-yellow)]()
 
-**SK-DRP** is an open-source research codebase for **Syntax-Knowledge enhanced Dynamic Reasoning with Prompt learning** for interpretable knowledge graph question answering.
-
-This repository contains the cleaned implementation scripts for the manuscript:
+This repository provides research code related to the manuscript:
 
 > **Syntax-aware dynamic reasoning with large language models for interpretable knowledge graph question answering**
 
-The project is designed to support peer review, reproducibility, and future research on LLM-assisted multi-hop reasoning over knowledge graphs.
+The associated method, **SK-DRP** short for **Syntax-Knowledge enhanced Dynamic Reasoning with Prompt learning**, studies interpretable knowledge graph question answering through syntax- and knowledge-enhanced question representation, dynamic multi-hop reasoning, and LLM-assisted answer selection.
+
+The current public repository is a cleaned research code release. It mainly contains dataset-specific KGQA scripts, dynamic reasoning components, training and evaluation entry points, and utility modules used in our experimental workflow. It is intended to support code inspection, peer review, and future reproducibility improvements.
+
+Please note that this repository is not yet a fully self-contained one-command reproduction package. Some external resources and auxiliary components, such as benchmark datasets, Freebase-derived files, trained checkpoints, generated LLM outputs, private server paths, and full LLM evidence-generation configurations, are not redistributed in the current release.
 
 ## Repository
 
@@ -20,44 +22,60 @@ The project is designed to support peer review, reproducibility, and future rese
 https://github.com/JungleTrailblazer/SK-DRP
 ```
 
+## Archived Version
+
+The release version associated with the manuscript has been archived in Zenodo.
+
+```text
+DOI: 10.5281/zenodo.20555971
+```
+
 ## Overview
 
-Knowledge graph question answering (KGQA) aims to answer natural language questions by grounding them in structured knowledge graphs. Compared with pure language-model-based question answering, KGQA can provide more reliable factual grounding and more interpretable reasoning traces.
+Knowledge graph question answering aims to answer natural language questions by grounding them in structured knowledge graphs. Compared with purely text-based generation, KGQA can provide explicit entity-relation grounding and more interpretable reasoning traces.
 
-However, existing KGQA systems still face several challenges:
+The SK-DRP framework studied in the manuscript contains three main parts:
 
-* Complex and compositional questions are difficult to represent accurately.
-* Multi-hop reasoning paths are often not sufficiently transparent.
-* Local triple-level reasoning may ignore global path-level evidence.
-* LLM-assisted KGQA systems may introduce additional cost, latency, and hallucination risks.
+1. **Syntax- and knowledge-enhanced question representation**, which uses dependency information and KG-oriented knowledge augmentation to improve question understanding.
+2. **Dynamic multi-hop reasoning over knowledge graphs**, which performs hop-level path expansion and entity scoring through attention- and gate-based reasoning signals.
+3. **LLM-assisted answer selection**, which converts candidate global paths into natural-language evidence and selects final answers from candidate entities.
 
-**SK-DRP** addresses these challenges through a modular framework that combines:
+The current repository focuses on releasing the core KGQA reasoning scripts and dataset-specific experimental pipeline. Additional cleaned materials for preprocessing, configuration, and LLM-assisted evidence generation will be added in future updates.
 
-1. Syntax- and knowledge-enhanced question representation.
-2. Dynamic multi-hop path reasoning over knowledge graphs.
-3. LLM-assisted answer selection based on compressed global reasoning paths.
+## Current Release Scope
 
-The repository provides source scripts, configuration notes, dependency information, and dataset-specific entry points for experiments on **MetaQA**, **WebQSP**, and **ComplexWebQuestions (CWQ)**.
+The current public version includes:
 
-## Key Features
+* Dataset-specific scripts for MetaQA, WebQSP, WebQSP_half, and CWQ.
+* Training, prediction, demonstration, and evaluation entry points.
+* Core KGQA modules for question encoding, relation prediction, entity scoring, hop-level reasoning, and path expansion.
+* Utility modules for GRU encoders, schedulers, optimization, metrics, and helper functions.
+* Basic dependency information and running notes.
 
-* Syntax-aware question representation using dependency-based encoding.
-* Knowledge-enhanced language-model representations aligned with KG triples.
-* Dynamic reasoning module for explicit hop-level path expansion.
-* Candidate path scoring and answer prediction over knowledge graphs.
-* LLM-assisted global path verbalization and answer selection.
-* Dataset-specific scripts for MetaQA, WebQSP, and CWQ.
-* Research-oriented implementation for reproducibility and future extension.
+The current public version does **not** include:
+
+* Public benchmark datasets.
+* Freebase-derived KG resources.
+* Preprocessed local data files.
+* Trained checkpoints.
+* Generated LLM outputs.
+* API keys or proprietary LLM service configurations.
+* Private server-specific absolute paths.
+* A fully packaged LLM fine-tuning and inference pipeline.
+* Complete dataset construction scripts for all external resources.
+
+Users who wish to reproduce the full experimental results should prepare the public datasets and KG resources locally and configure model paths according to their own environment.
 
 ## Supported Benchmarks
 
-This repository contains scripts for the following KGQA benchmarks:
+This repository contains scripts related to the following KGQA benchmarks:
 
-| Dataset | Description                                                        |
-| ------- | ------------------------------------------------------------------ |
-| MetaQA  | Multi-hop question answering over a movie-domain knowledge graph   |
-| WebQSP  | Knowledge graph question answering over Freebase-derived resources |
-| CWQ     | Complex multi-hop question answering with compositional questions  |
+| Dataset     | Description                                                        |
+| ----------- | ------------------------------------------------------------------ |
+| MetaQA      | Multi-hop question answering over a movie-domain knowledge graph   |
+| WebQSP      | Knowledge graph question answering over Freebase-derived resources |
+| WebQSP_half | Additional WebQSP variant used in our experimental workflow        |
+| CWQ         | ComplexWebQuestions, a compositional multi-hop KGQA benchmark      |
 
 ## Repository Structure
 
@@ -73,31 +91,33 @@ SK-DRP/
 └── README.md           # Project documentation
 ```
 
-## Method Summary
+## Method Components
 
-SK-DRP follows a modular architecture consisting of three main components.
+The manuscript describes SK-DRP as a modular KGQA framework. The following summary explains the relationship between the method and the current code release.
 
-### 1. Syntax- and Knowledge-Enhanced Question Representation
+### 1. Syntax- and Knowledge-Enhanced Representation
 
-The model first builds enhanced question representations by combining syntactic and knowledge-aware features.
+The full method uses syntactic dependency information and knowledge-augmented pre-training to improve question representation and KG alignment.
 
-The syntax-aware component uses dependency information to capture structural relations between question tokens. The knowledge-enhanced component uses knowledge masking and contrastive learning over KG-derived textual representations to improve alignment between natural language questions and structured KG entities and relations.
+In the manuscript, syntactic information is modeled through a Multi-GRU-style encoder over dependency structures, while knowledge augmentation uses KG-neighborhood linearization, knowledge masking, and contrastive learning.
 
-### 2. Dynamic Reasoning over Knowledge Graphs
+The current repository includes the main question-encoding and KGQA model scripts used in the experimental workflow. Some cleaned preprocessing resources and auxiliary knowledge-augmentation scripts are not fully packaged in this release.
 
-The dynamic reasoning module performs explicit multi-hop path expansion. At each reasoning hop, the model generates an indicator vector from the enhanced question representation and uses it to guide local path matching, entity scoring, and path expansion.
+### 2. Dynamic Multi-hop KG Reasoning
 
-This design allows the reasoning process to be inspected step by step, improving interpretability compared with purely embedding-based answer selection.
+The dynamic reasoning module is the main focus of the released code.
+
+The model performs hop-level reasoning over the knowledge graph by predicting relations, expanding candidate paths, updating entity scores, and aggregating hop-level predictions. This design provides explicit intermediate reasoning signals and supports interpretable path-based answer prediction.
 
 ### 3. LLM-Assisted Answer Selection
 
-After dynamic reasoning, SK-DRP obtains candidate global paths and candidate answer entities. Candidate paths are compressed and transformed into natural-language evidence. A fine-tuned LLM then selects the final answer from the candidate answer set using the generated evidence.
+The manuscript further uses an LLM-assisted stage to verbalize compressed candidate paths and select the final answer from candidate entities.
 
-This module is used for global path-level reasoning and answer selection rather than for every path-expansion step, reducing repeated LLM calls during graph traversal.
+This stage depends on external LLM resources, generated evidence text, fine-tuning configuration, and local inference settings. The current repository documents this component at a high level, while the full cleaned LLM pipeline and reusable examples are planned for a future update.
 
 ## Installation
 
-The scripts were developed with:
+The scripts were developed with the following environment:
 
 * Python 3.8.8
 * PyTorch 2.2.1
@@ -117,27 +137,20 @@ source skdrp_env/bin/activate
 pip install -r requirements.txt
 ```
 
-For Windows PowerShell:
-
-```powershell
-python -m venv skdrp_env
-.\skdrp_env\Scripts\Activate.ps1
-pip install -r requirements.txt
-```
+Depending on the selected script and dataset, users may also need local paths for pretrained language models, GloVe embeddings, benchmark datasets, KG files, and trained checkpoints.
 
 ## Data and External Resources
 
-This repository does **not** redistribute public benchmark datasets, Freebase-derived resources, pretrained model checkpoints, API keys, generated LLM outputs, or server-specific paths.
+This repository does not redistribute public benchmark datasets or Freebase-derived resources.
 
-Before running experiments, users need to prepare the following resources locally:
+Before running experiments, users should prepare the required resources locally, including but not limited to:
 
 * MetaQA dataset and knowledge graph files.
 * WebQSP dataset and Freebase-derived resources.
 * CWQ dataset and Freebase-derived resources.
 * Pretrained BERT or RoBERTa model identifiers or local directories.
-* GloVe pickle file for MetaQA if required by the selected script.
+* GloVe pickle file for MetaQA, if required by the selected script.
 * Checkpoints for prediction or demonstration scripts.
-* LLM backend or locally fine-tuned model paths for evidence generation and answer selection.
 
 Suggested environment variables:
 
@@ -148,20 +161,11 @@ export ROBERTA_BASE=roberta-base
 export GLOVE_PICKLE_PATH=/path/to/glove.840B.300d.pickle
 ```
 
-For Windows PowerShell:
-
-```powershell
-$env:SK_DRP_ROOT="D:\path\to\SK-DRP"
-$env:BERT_BASE_UNCASED="bert-base-uncased"
-$env:ROBERTA_BASE="roberta-base"
-$env:GLOVE_PICKLE_PATH="D:\path\to\glove.840B.300d.pickle"
-```
-
 ## Example Entry Points
 
 The exact commands depend on dataset preparation and local path configuration.
 
-Typical training entry points are:
+Typical training entry points include:
 
 ```bash
 python WebQSP/train_hop_final.py --input_dir data/WebQSP
@@ -169,38 +173,59 @@ python CWQ/train_final.py --input_dir data/CWQ
 python MetaQA/train_final.py --input_dir data/MetaQA
 ```
 
-For prediction or demonstration, inspect the corresponding `demo_*.py`, `predict*.py`, and evaluation scripts in each dataset folder. Checkpoint paths should be configured before running prediction scripts.
+For prediction or demonstration, please inspect the corresponding `demo_*.py`, `predict*.py`, and evaluation scripts in each dataset folder.
 
-## Reproducibility Scope
+Checkpoint paths and dataset paths should be configured before running prediction or demonstration scripts.
 
-This repository is a cleaned research release. It improves transparency by making the implementation scripts and experiment entry points publicly available.
+## Experimental Settings in the Manuscript
 
-However, the repository does not fully package every external artifact required to reproduce all reported numbers directly. Exact results may vary depending on:
+The manuscript reports experiments on MetaQA, WebQSP, and CWQ.
 
-* Dataset preprocessing.
-* Freebase resource construction.
-* Pretrained language model versions.
-* LLM backend and generation settings.
-* Hardware environment.
-* Random seeds.
-* Checkpoint availability.
-* Local path configuration.
-
-Users who want to reproduce the experiments should obtain the public benchmark datasets, prepare Freebase-derived resources, configure pretrained model paths, and follow the experiment settings described in the associated manuscript.
-
-## Experimental Setting
-
-The main experiments are conducted on MetaQA, WebQSP, and CWQ.
-
-The implementation uses:
+The reported experimental setup uses:
 
 * Python 3.8.8
 * PyTorch 2.2.1
 * CUDA 12.1
+* BERT-base-uncased for knowledge-augmented encoding
+* Maximum reasoning step of 2 for WebQSP
+* Maximum reasoning step of 3 for MetaQA and CWQ
+* Entity score threshold of 0.7 during path expansion
+* Maximum active local paths of 400
+* Llama-2-7B with LoRA for the LLM-based evidence generation setting
 
-The dynamic reasoning module expands candidate paths over the knowledge graph and produces entity scores. The LLM-assisted answer-selection module uses compressed candidate paths as evidence for final answer selection.
+These settings are provided for reference. Exact reproduction may require additional dataset preprocessing, Freebase resource construction, checkpoint preparation, and LLM-related configuration.
 
-For detailed experimental settings, please refer to the associated manuscript.
+## Reproducibility Notes
+
+This repository improves transparency by releasing implementation scripts and dataset-specific entry points. However, exact reproduction of all reported results is not guaranteed by this repository alone.
+
+Results may vary depending on:
+
+* Dataset preprocessing.
+* Freebase subset construction.
+* Entity and relation indexing.
+* Pretrained model versions.
+* Checkpoint availability.
+* Random seed settings.
+* CUDA and hardware environment.
+* LLM backend and decoding settings.
+* Local path configuration.
+
+Users who want to build on this repository should first prepare the public datasets and KG resources, then adapt the scripts to their local environment.
+
+## Planned Updates
+
+We plan to improve this repository with additional cleaned and reusable materials, including:
+
+* More detailed dataset preparation instructions.
+* Example configuration files.
+* Minimal runnable toy examples.
+* Cleaner command-line interfaces.
+* Docker or Conda environment support.
+* Additional notes for reproducing reported experimental settings.
+* Optional scripts for path compression and path-to-text evidence construction.
+* Documentation for LLM-assisted answer selection.
+* Additional preprocessing scripts where redistribution is possible.
 
 ## Citation
 
@@ -225,7 +250,7 @@ Please update this BibTeX entry after the manuscript is formally published.
 
 ## Maintenance and Contributions
 
-This repository is maintained as a research codebase for peer review, reproducibility, and follow-up work.
+This repository is maintained as a research code release for peer review, code inspection, and follow-up work.
 
 Issues and pull requests are welcome for:
 
@@ -237,19 +262,7 @@ Issues and pull requests are welcome for:
 * Additional benchmark support.
 * Suggestions for simplifying the running pipeline.
 
-Because this is a research release, some paths and external resources may need to be configured manually. If you encounter unclear instructions, please open an issue with your environment details and the command you tried to run.
-
-## Roadmap
-
-Planned improvements include:
-
-* More detailed dataset preparation instructions.
-* Example configuration files.
-* Minimal runnable toy examples.
-* Docker or Conda environment support.
-* Cleaner command-line interfaces.
-* Additional notes for reproducing reported experimental settings.
-* Optional scripts for preparing path-to-text evidence examples.
+Because this is a research code release, some paths and external resources may need to be configured manually. If you encounter unclear instructions, please open an issue with your environment details and the command you tried to run.
 
 ## License
 
