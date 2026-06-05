@@ -22,14 +22,6 @@ Please note that this repository is not yet a fully self-contained one-command r
 https://github.com/JungleTrailblazer/SK-DRP
 ```
 
-## Archived Version
-
-The release version associated with the manuscript has been archived in Zenodo.
-
-```text
-DOI: 10.5281/zenodo.20555971
-```
-
 ## Overview
 
 Knowledge graph question answering aims to answer natural language questions by grounding them in structured knowledge graphs. Compared with purely text-based generation, KGQA can provide explicit entity-relation grounding and more interpretable reasoning traces.
