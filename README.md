@@ -4,15 +4,15 @@
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.x-red)]()
 [![CUDA](https://img.shields.io/badge/CUDA-12.1-green)]()
 [![License](https://img.shields.io/badge/License-See%20LICENSE.txt-lightgrey)]()
-[![Status](https://img.shields.io/badge/Status-Submitted%20for%20Publication-green)]()
+[![Status](https://img.shields.io/badge/Status-Accepted%20for%20Publication-brightgreen)]()
 
-This repository provides research code related to the manuscript:
+This repository provides the official code implementation for the paper:
 
 > **Syntax-aware dynamic reasoning with large language models for interpretable knowledge graph question answering**
 
 The associated method, **SK-DRP** short for **Syntax-Knowledge enhanced Dynamic Reasoning with Prompt learning**, studies interpretable knowledge graph question answering through syntax- and knowledge-enhanced question representation, dynamic multi-hop reasoning, and LLM-assisted answer selection.
 
-The manuscript has been submitted for publication. The current public repository is a cleaned research code release. It mainly contains dataset-specific KGQA scripts, dynamic reasoning components, training and evaluation entry points, and utility modules used in our experimental workflow. It is intended to support code inspection, reproducibility checks, and follow-up work.
+The paper has been accepted for publication. The current public repository is a cleaned official code release. It mainly contains dataset-specific KGQA scripts, dynamic reasoning components, training and evaluation entry points, and utility modules used in our experimental workflow. It is intended to support reproducibility, code inspection, and follow-up work.
 
 Please note that this repository is not yet a fully self-contained one-command reproduction package. Some external resources and auxiliary components, such as benchmark datasets, Freebase-derived files, trained checkpoints, generated LLM outputs, private server paths, and full LLM evidence-generation configurations, are not redistributed in the current release.
 
@@ -26,7 +26,7 @@ https://github.com/JungleTrailblazer/SK-DRP
 
 Knowledge graph question answering aims to answer natural language questions by grounding them in structured knowledge graphs. Compared with purely text-based generation, KGQA can provide explicit entity-relation grounding and more interpretable reasoning traces.
 
-The SK-DRP framework studied in the manuscript contains three main parts:
+The SK-DRP framework studied in the paper contains three main parts:
 
 1. **Syntax- and knowledge-enhanced question representation**, which uses dependency information and KG-oriented knowledge augmentation to improve question understanding.
 2. **Dynamic multi-hop reasoning over knowledge graphs**, which performs hop-level path expansion and entity scoring through attention- and gate-based reasoning signals.
@@ -85,13 +85,13 @@ SK-DRP/
 
 ## Method Components
 
-The manuscript describes SK-DRP as a modular KGQA framework. The following summary explains the relationship between the method and the current code release.
+The paper describes SK-DRP as a modular KGQA framework. The following summary explains the relationship between the method and the current code release.
 
 ### 1. Syntax- and Knowledge-Enhanced Representation
 
 The full method uses syntactic dependency information and knowledge-augmented pre-training to improve question representation and KG alignment.
 
-In the manuscript, syntactic information is modeled through a Multi-GRU-style encoder over dependency structures, while knowledge augmentation uses KG-neighborhood linearization, knowledge masking, and contrastive learning.
+In the paper, syntactic information is modeled through a Multi-GRU-style encoder over dependency structures, while knowledge augmentation uses KG-neighborhood linearization, knowledge masking, and contrastive learning.
 
 The current repository includes the main question-encoding and KGQA model scripts used in the experimental workflow. Some cleaned preprocessing resources and auxiliary knowledge-augmentation scripts are not fully packaged in this release.
 
@@ -103,7 +103,7 @@ The model performs hop-level reasoning over the knowledge graph by predicting re
 
 ### 3. LLM-Assisted Answer Selection
 
-The manuscript further uses an LLM-assisted stage to verbalize compressed candidate paths and select the final answer from candidate entities.
+The paper further uses an LLM-assisted stage to verbalize compressed candidate paths and select the final answer from candidate entities.
 
 This stage depends on external LLM resources, generated evidence text, fine-tuning configuration, and local inference settings. The current repository documents this component at a high level, while the full cleaned LLM pipeline and reusable examples are planned for a future update.
 
@@ -171,9 +171,9 @@ For prediction or demonstration, please inspect the corresponding `demo_*.py`, `
 
 Checkpoint paths and dataset paths should be configured before running prediction or demonstration scripts.
 
-## Experimental Settings in the Manuscript
+## Experimental Settings
 
-The manuscript reports experiments on MetaQA, WebQSP, and CWQ.
+The paper reports experiments on MetaQA, WebQSP, and CWQ.
 
 The reported experimental setup uses:
 
@@ -223,18 +223,18 @@ We plan to improve this repository with additional cleaned and reusable material
 
 ## Citation
 
-If you use this repository in your research, please cite the associated manuscript:
+If you use this repository in your research, please cite our paper:
 
 ```bibtex
 @misc{yuan2026skdrp,
   title        = {Syntax-aware dynamic reasoning with large language models for interpretable knowledge graph question answering},
   author       = {Yuan, Ling and Wu, Bicheng and Yang, Yangyang},
   year         = {2026},
-  note         = {Submitted for publication}
+  note         = {Accepted for publication}
 }
 ```
 
-Please update this BibTeX entry after the manuscript is formally published.
+The formal citation will be updated with the final publication venue and page information after the paper is officially published.
 
 ## Authors
 
@@ -244,9 +244,7 @@ Please update this BibTeX entry after the manuscript is formally published.
 
 ## Maintenance and Contributions
 
-This repository is maintained as a research code release accompanying the submitted manuscript, for code inspection and follow-up work.
-
-Issues and pull requests are welcome for:
+This is the official code release accompanying the accepted paper. We welcome:
 
 * Documentation improvements.
 * Environment setup fixes.
@@ -256,7 +254,7 @@ Issues and pull requests are welcome for:
 * Additional benchmark support.
 * Suggestions for simplifying the running pipeline.
 
-Because this is a research code release, some paths and external resources may need to be configured manually. If you encounter unclear instructions, please open an issue with your environment details and the command you tried to run.
+Because this is an official code release, some paths and external resources may need to be configured manually. If you encounter unclear instructions, please open an issue with your environment details and the command you tried to run.
 
 ## License
 
