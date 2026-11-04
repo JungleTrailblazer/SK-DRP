@@ -4,7 +4,7 @@
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.x-red)]()
 [![CUDA](https://img.shields.io/badge/CUDA-12.1-green)]()
 [![License](https://img.shields.io/badge/License-See%20LICENSE.txt-lightgrey)]()
-[![Status](https://img.shields.io/badge/Status-Research%20Code%20Release-yellow)]()
+[![Status](https://img.shields.io/badge/Status-Submitted%20for%20Publication-green)]()
 
 This repository provides research code related to the manuscript:
 
@@ -12,7 +12,7 @@ This repository provides research code related to the manuscript:
 
 The associated method, **SK-DRP** short for **Syntax-Knowledge enhanced Dynamic Reasoning with Prompt learning**, studies interpretable knowledge graph question answering through syntax- and knowledge-enhanced question representation, dynamic multi-hop reasoning, and LLM-assisted answer selection.
 
-The current public repository is a cleaned research code release. It mainly contains dataset-specific KGQA scripts, dynamic reasoning components, training and evaluation entry points, and utility modules used in our experimental workflow. It is intended to support code inspection, peer review, and future reproducibility improvements.
+The manuscript has been submitted for publication. The current public repository is a cleaned research code release. It mainly contains dataset-specific KGQA scripts, dynamic reasoning components, training and evaluation entry points, and utility modules used in our experimental workflow. It is intended to support code inspection, reproducibility checks, and follow-up work.
 
 Please note that this repository is not yet a fully self-contained one-command reproduction package. Some external resources and auxiliary components, such as benchmark datasets, Freebase-derived files, trained checkpoints, generated LLM outputs, private server paths, and full LLM evidence-generation configurations, are not redistributed in the current release.
 
@@ -230,7 +230,7 @@ If you use this repository in your research, please cite the associated manuscri
   title        = {Syntax-aware dynamic reasoning with large language models for interpretable knowledge graph question answering},
   author       = {Yuan, Ling and Wu, Bicheng and Yang, Yangyang},
   year         = {2026},
-  note         = {Manuscript under review}
+  note         = {Submitted for publication}
 }
 ```
 
@@ -244,7 +244,7 @@ Please update this BibTeX entry after the manuscript is formally published.
 
 ## Maintenance and Contributions
 
-This repository is maintained as a research code release for peer review, code inspection, and follow-up work.
+This repository is maintained as a research code release accompanying the submitted manuscript, for code inspection and follow-up work.
 
 Issues and pull requests are welcome for:
 
